@@ -89,10 +89,12 @@ class Kohana_MangoDB {
 		}
 
 		// create Mongo object (but don't connect just yet)
-		$this->_connection = new Mongo($server, array('connect' => FALSE) + $options);
+//		$this->_connection = new Mongo($server, array('connect' => FALSE) + $options);
+		$this->_connection = new MongoClient($server, array('connectTimeoutMS' => FALSE) + $options);
 
 		// connect
-		if ( Arr::get($options, 'connect', TRUE))
+//		if ( Arr::get($options, 'connect', TRUE))
+		if ( Arr::get($options, 'connectTimeoutMS', TRUE))
 		{
 			$this->connect();
 		}
@@ -113,9 +115,9 @@ class Kohana_MangoDB {
 			return TRUE;
 		}
 
-		$this->_connection->connect();
-
-		$this->_connected    = $this->_connection->connected;
+//		$this->_connection->connect();
+//		$this->_connected    = $this->_connection->connected;
+		$this->_connected = $this->_connection->connect();
 		$this->_db           = $this->_connected
 			? $this->_connection->selectDB(Arr::path($this->_config, 'connection.options.db'))
 			: NULL;
