@@ -977,7 +977,7 @@ abstract class Kohana_Mango implements Mango_Interface {
 		{
 			$options = is_array($safe)
 				? $safe
-				: array('safe' => $safe);
+				: array('w' => $safe);
 
 			try
 			{
@@ -1017,7 +1017,7 @@ abstract class Kohana_Mango implements Mango_Interface {
 		{
 			$criteria['_id'] = $this->_id;
 
-			$options = is_array($safe) ? $safe : array('safe' => $safe);
+			$options = is_array($safe) ? $safe : array('w' => $safe);
 
 			try
 			{
@@ -1085,7 +1085,7 @@ abstract class Kohana_Mango implements Mango_Interface {
 			}
 		}
 
-		$options = is_array($safe) ? $safe : array('safe' => $safe);
+		$options = is_array($safe) ? $safe : array('w' => $safe);
 
 		try
 		{
