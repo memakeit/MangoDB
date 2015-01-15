@@ -410,7 +410,14 @@ class Kohana_MangoDB {
 				$r = $c->find($query,$fields);
 			break;
 			case 'group':
-				$r = $c->group($keys,$initial,$reduce,$condition);
+				if (empty($condition))
+				{
+					$r = $c->group($keys,$initial,$reduce);
+				}
+				else
+				{
+					$r = $c->group($keys,$initial,$reduce,$condition);
+				}
 			break;
 			case 'update':
 				$r = $c->update($criteria, $values, $options);
