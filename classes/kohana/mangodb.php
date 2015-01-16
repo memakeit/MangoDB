@@ -245,6 +245,16 @@ class Kohana_MangoDB {
 		));
 	}
 
+	public function distinct($collection_name, $field_name)
+	{
+		$this->_connected OR $this->connect();
+		$result = $this->_db->command(array(
+			'distinct' => $collection_name,
+			'key' => $field_name,
+		));
+		return Arr::get($result, 'values');
+	}
+
 	public function find_one($collection_name, array $query = array(), array $fields = array())
 	{
 		return $this->_call('find_one', array(
