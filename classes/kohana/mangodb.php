@@ -218,6 +218,16 @@ class Kohana_MangoDB {
 	}
 
 	/** Data Management */
+	
+	public function aggregrate ( $collection_name, array $pipeline )
+	{
+		$this->_connected OR $this->connect();
+		$result = $this->_db->command(array(
+			'aggregate' => $collection_name,
+			'pipeline' => $pipeline,
+		));
+		return $result;
+	}
 
 	public function batch_insert ( $collection_name, array $a, array $options = array() )
 	{
