@@ -200,6 +200,15 @@ class Kohana_MangoDB {
 			'max'     => $max
 		));
 	}
+	
+	public function create_index ( $collection_name, $keys, $options = array())
+	{
+		return $this->_call('create_index', array(
+			'collection_name' => $collection_name,
+			'keys'            => $keys,
+			'options'         => $options
+		));
+	}
 
 	public function drop_collection( $name )
 	{
@@ -210,7 +219,7 @@ class Kohana_MangoDB {
 
 	public function ensure_index ( $collection_name, $keys, $options = array())
 	{
-		return $this->_call('ensure_index', array(
+		return $this->_call('create_index', array(
 			'collection_name' => $collection_name,
 			'keys'            => $keys,
 			'options'         => $options
@@ -402,6 +411,9 @@ class Kohana_MangoDB {
 
 		switch ( $command)
 		{
+			case 'create_index':
+				$r = $c->ensureIndex($keys, $options);
+			break;
 			case 'ensure_index':
 				$r = $c->ensureIndex($keys, $options);
 			break;
